@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: doc-converter-backend
+    env: node
+    plan: free
+    region: oregon
+    repo: https://github.com/dekern7979/Public
+    branch: main
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: VITE_FRONTEND_FORGE_API_KEY
+        sync: false
+    healthCheckPath: /api/health
+    instances: 1
